@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/home"
+            android:title="Home"
+            android:icon="@drawable/ic_home_black_48dp"/>
+    </group>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/wk1"
+            android:title="Week 1"
+            android:icon="@drawable/ic_turned_in_black_48dp"/>
+        <item
+            android:id="@+id/wk2"
+            android:title="Week 2"
+            android:icon="@drawable/ic_turned_in_black_48dp"/>
+
+        <item
+            android:id="@+id/wk3"
+            android:title="Week 3"
+            android:icon="@drawable/ic_turned_in_black_48dp"/>
+
+        <item
+            android:id="@+id/wk4"
+            android:title="Week 4"
+            android:icon="@drawable/ic_turned_in_black_48dp"/>
+
+
+    </group>
+</menu>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="quality_array">
+        <item>Select Quality</item>
+        <item>Excellent</item>
+        <item>Good</item>
+        <item>Poor</item>
+
+    </string-array>
+</resources>

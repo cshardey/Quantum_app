@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/meal_today"
+            android:title="Lunch"
+            android:icon="@drawable/ic_local_dining_black_48dp"/>
+        <item
+            android:id="@+id/order"
+            android:title="Order meals"
+            android:icon="@drawable/ic_add_black_48dp"/>
+
+
+
+        <item
+            android:id="@+id/view"
+            android:title="View Orders"
+            android:icon="@drawable/ic_turned_in_black_48dp"/>
+
+
+    </group>
+</menu>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.quantumgroup.quantum">
+
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-sdk tools:overrideLibrary="com.balysv.materialripple"/>
+
+    <!-- GCM requires a Google account. -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <permission android:name="com.quantumgroup.quantum.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+    <uses-permission android:name="com.quantumgroup.quantum.permission.C2D_MESSAGE" />
+    <!-- This app has permission to register and receive dataf message. -->
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".Signin"
+            android:noHistory="true"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.quantumgroup.quantum.MESSAGE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Menu"
+            android:label="@string/title_activity_menu"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Quantum"
+            android:label="@string/title_activity_quantum"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Lunch"
+            android:label="@string/title_activity_lunch"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".Monday" />
+        <activity android:name=".Tuesday" />
+        <activity android:name=".Wednesday" />
+        <activity android:name=".Thursday" />
+        <activity android:name=".Friday" />
+        <activity
+            android:name=".Week2"
+            android:noHistory="true"
+            android:label="@string/title_activity_week2"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".Mondaywk2" />
+        <activity android:name=".Tuesdaywk2" />
+        <activity android:name=".Wednesdaywk2" />
+
+        <activity android:name=".Test" />
+        <activity
+            android:name=".Trial"
+            android:label="@string/title_activity_trial"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Submit"
+            android:label="@string/title_activity_submit"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".LunchHome"
+            android:label="@string/title_activity_lunch_home"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Order"
+            android:label="@string/title_activity_order"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".Feedback" />
+        <activity
+            android:name=".ViewOrders"
+            android:label="@string/title_activity_view_orders"
+            android:theme="@style/AppTheme"></activity>
+        <receiver
+            android:name="com.pushbots.google.gcm.GCMBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <!-- Receives the actual messages. -->
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <!-- Receives the registration id. -->
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+                <category android:name="com.quantumgroup.quantum" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.pushbots.push.DefaultPushHandler" />
+        <service android:name="com.pushbots.push.GCMIntentService" />
+    </application>
+
+</manifest>
