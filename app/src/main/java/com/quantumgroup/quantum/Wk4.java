@@ -36,9 +36,6 @@ import java.util.List;
 
 
 
-
-import static com.quantumgroup.quantum.ObjectToFileUtil.writeObject;
-
 public class Wk4  extends Fragment  {
     private  List<DataLunch> data=new ArrayList<>();
 

@@ -176,10 +176,7 @@
                  settings = getSharedPreferences(Signin.PREFS_NAME, 0);
                     //String user_id = settings.getString("user_id", "");
                      acces_token = settings.getString("access_token","");
-                    // Enter URL address where your json file resides
-                    // Even you can make call to php file which returns json data
-                    //url = new URL("http://192.168.43.68:5000/employee/foods/today?user_id=" + user_id);
-                   // url = new URL("http://192.168.43.68:8069/employee/foods/today");
+
                     url = new URL(ip_addrs+"/employee/foods/today");
                 } catch (MalformedURLException e) {
                     // TODO Auto-generated catch block
@@ -218,8 +215,11 @@
                     conn.connect();
                     Log.i("JSONDATA", requestPayload.toString());
 
-                } catch (java.net.SocketTimeoutException e) {
+                } catch (java.net.ConnectException e) {
+                    return ("timeout");
 
+                } catch (java.net.SocketTimeoutException e){
+                    return ("timeout");
 
                 } catch (IOException e1) {
                     // TODO Auto-generated catch block
@@ -247,16 +247,12 @@
                         return (result.toString());
 
 
-
-
-                    }else {
+                    } else {
 
                         return ("unsuccessful");
                     }
-                } catch (ConnectException e) {
-                    System.out.println("More than "  + " elapsed.");
 
-                    return ("timeout");
+
                 } catch (IOException e) {
                     e.printStackTrace();
                     return e.toString();
@@ -307,25 +303,31 @@
     //                }
     //
     //
-    //            if(result.equalsIgnoreCase("timeout")){
-    //                AlertDialog alertDialog = new AlertDialog.Builder(LunchHome.this).create();
-    //                alertDialog.setTitle("Connection Timeout");
-    //                alertDialog.setMessage("Took to long establishing connection to server");
-    //                alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "RETRY",
-    //                        new DialogInterface.OnClickListener() {
-    //                            public void onClick(DialogInterface dialog, int which) {
-    //                                new AsyncFetch().execute();
-    //                            }
-    //                        });
-    //                Window window = alertDialog.getWindow();
-    //                window.setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL,
-    //                        WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL);
-    //                window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-    //                alertDialog.show();
-    //
-    //
-    //            }
-    //
+                if(result.equalsIgnoreCase("timeout")){
+                    AlertDialog alertDialog = new AlertDialog.Builder(LunchHome.this).create();
+                    alertDialog.setTitle("Connection Timeout");
+                    alertDialog.setMessage("Took to long establishing connection to server");
+                    alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "RETRY",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    new AsyncFetch().execute();
+                                }
+                            });
+                    alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE,"EXIT", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finishAffinity();
+                        }
+                    });
+                    Window window = alertDialog.getWindow();
+                    window.setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL,
+                            WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL);
+                    window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                    alertDialog.show();
+
+
+                }
+
 
 
                 try {

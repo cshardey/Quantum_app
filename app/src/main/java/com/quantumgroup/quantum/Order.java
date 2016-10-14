@@ -148,11 +148,14 @@ public class Order extends AppCompatActivity {
 
                     return ("unsuccessful");
                 }
-            } catch (ConnectException e) {
+            } catch (java.net.ConnectException e) {
                 System.out.println("More than "  + " elapsed.");
 
                 return ("timeout");
-            } catch (IOException e) {
+            }  catch (java.net.SocketTimeoutException e){
+                return ("timeout");
+            }
+            catch (IOException e) {
                 e.printStackTrace();
                 return e.toString();
             } finally {
@@ -192,7 +195,7 @@ public class Order extends AppCompatActivity {
                 alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "CANCEL",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                System.exit(0);
+                                finishAffinity();
                             }
                         });
                 alertDialog.show();

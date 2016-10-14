@@ -58,8 +58,6 @@ import java.util.List;
 import java.util.jar.Attributes;
 
 
-import static com.quantumgroup.quantum.ObjectToFileUtil.writeObject;
-
 public class Tuesday  extends Fragment  {
 
     PopupWindow popupWindow;

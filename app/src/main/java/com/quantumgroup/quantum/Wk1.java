@@ -43,10 +43,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
-
-import static com.quantumgroup.quantum.ObjectToFileUtil.writeObject;
-
 public class Wk1  extends Fragment  {
     private  List<DataLunch> data=new ArrayList<>();
 
@@ -131,11 +127,7 @@ public class Wk1  extends Fragment  {
                 writer.flush();
                 writer.close();
                 os.close();
-                try {
-                    conn.connect();
-                } catch (java.net.ConnectException timeout){
-                    Log.i("Felix is here", "felix is here");
-                }
+                conn.connect();
                 Log.i("JSONDATA", requestPayload.toString());
 
 
@@ -182,11 +174,13 @@ public class Wk1  extends Fragment  {
                     return ("unsuccessful");
                 }
 
-            } catch (ConnectException e) {
-                System.out.println("More than "  + " elapsed.");
-
+            } catch (java.net.ConnectException e) {
                 return ("timeout");
-            } catch (IOException e) {
+            } catch (java.net.SocketTimeoutException e){
+                return ("timeout");
+            }
+
+            catch (IOException e) {
                 e.printStackTrace();
                 return e.toString();
             } finally {
@@ -216,6 +210,7 @@ public class Wk1  extends Fragment  {
 
          if (result.equalsIgnoreCase("nocontent")){
          error.setText("Oops.. You haven't made an order for this week");
+
          }if(result.equalsIgnoreCase("timeout")){
                 AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
                 alertDialog.setTitle("Connection Timeout");
@@ -226,6 +221,13 @@ public class Wk1  extends Fragment  {
                                 new AsyncFetch().execute();
                             }
                         });
+                alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE,"EXIT", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        getActivity().finish();
+                        System.exit(0);
+                    }
+                });
                 alertDialog.show();
 
 

@@ -410,11 +410,15 @@ public class ViewOrders extends AppCompatActivity {
 
                     return ("unsuccessful");
                 }
-            } catch (ConnectException e) {
+            } catch (java.net.ConnectException e) {
                 System.out.println("More than "  + " elapsed.");
 
                 return ("timeout");
-            } catch (IOException e) {
+            } catch (java.net.SocketTimeoutException e){
+                return ("timeout");
+            }
+
+            catch (IOException e) {
                 e.printStackTrace();
                 return e.toString();
             } finally {
@@ -452,7 +456,7 @@ public class ViewOrders extends AppCompatActivity {
                 alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE,"EXIT", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                     finish();
+                        finishAffinity();
                     }
                 });
                 Window window = alertDialog.getWindow();
